@@ -2,149 +2,248 @@
 /**
  * Custom Taxonomies
  *
- * @package MangaPremium
+ * Registers all custom taxonomies for organizing manga content.
+ *
+ * @package Auramaga
+ * @since 2.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
-function manga_premium_register_taxonomies() {
-	$post_types = array( 'manga' );
+/**
+ * Register Manga Taxonomies
+ *
+ * @since 2.0.0
+ */
+function auramaga_register_taxonomies() {
+	$manga_post_type = array( 'manga' );
 
-	/* ─── Genre ─────────────────────────────────────── */
-	register_taxonomy( 'manga_genre', $post_types, array(
-		'labels' => array(
-			'name'          => esc_html__( 'Genres', 'manga-premium' ),
-			'singular_name' => esc_html__( 'Genre', 'manga-premium' ),
-			'search_items'  => esc_html__( 'Search Genres', 'manga-premium' ),
-			'all_items'     => esc_html__( 'All Genres', 'manga-premium' ),
-			'edit_item'     => esc_html__( 'Edit Genre', 'manga-premium' ),
-			'add_new_item'  => esc_html__( 'Add New Genre', 'manga-premium' ),
-			'menu_name'     => esc_html__( 'Genres', 'manga-premium' ),
-		),
-		'public'             => true,
-		'hierarchical'       => true,
-		'show_in_rest'       => true,
-		'rewrite'            => array( 'slug' => 'genre', 'with_front' => false ),
-		'show_admin_column'  => true,
-	) );
+	// Genre - hierarchical.
+	register_taxonomy(
+		'manga_genre',
+		$manga_post_type,
+		array(
+			'labels'            => array(
+				'name'          => esc_html_x( 'Genres', 'taxonomy general name', 'auramaga' ),
+				'singular_name' => esc_html_x( 'Genre', 'taxonomy singular name', 'auramaga' ),
+				'search_items'  => esc_html__( 'Search Genres', 'auramaga' ),
+				'all_items'     => esc_html__( 'All Genres', 'auramaga' ),
+				'parent_item'   => esc_html__( 'Parent Genre', 'auramaga' ),
+				'edit_item'     => esc_html__( 'Edit Genre', 'auramaga' ),
+				'update_item'   => esc_html__( 'Update Genre', 'auramaga' ),
+				'add_new_item'  => esc_html__( 'Add New Genre', 'auramaga' ),
+				'new_item_name' => esc_html__( 'New Genre Name', 'auramaga' ),
+				'menu_name'     => esc_html__( 'Genres', 'auramaga' ),
+			),
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'manga/genre',
+				'with_front' => false,
+			),
+		)
+	);
 
-	/* ─── Tag ───────────────────────────────────────── */
-	register_taxonomy( 'manga_tag', $post_types, array(
-		'labels' => array(
-			'name'          => esc_html__( 'Manga Tags', 'manga-premium' ),
-			'singular_name' => esc_html__( 'Tag', 'manga-premium' ),
-			'search_items'  => esc_html__( 'Search Tags', 'manga-premium' ),
-			'all_items'     => esc_html__( 'All Tags', 'manga-premium' ),
-			'add_new_item'  => esc_html__( 'Add New Tag', 'manga-premium' ),
-			'menu_name'     => esc_html__( 'Tags', 'manga-premium' ),
-		),
-		'public'             => true,
-		'hierarchical'       => false,
-		'show_in_rest'       => true,
-		'rewrite'            => array( 'slug' => 'tag', 'with_front' => false ),
-		'show_admin_column'  => true,
-	) );
+	// Tag - non-hierarchical.
+	register_taxonomy(
+		'manga_tag',
+		$manga_post_type,
+		array(
+			'labels'            => array(
+				'name'          => esc_html_x( 'Tags', 'taxonomy general name', 'auramaga' ),
+				'singular_name' => esc_html_x( 'Tag', 'taxonomy singular name', 'auramaga' ),
+				'search_items'  => esc_html__( 'Search Tags', 'auramaga' ),
+				'all_items'     => esc_html__( 'All Tags', 'auramaga' ),
+				'edit_item'     => esc_html__( 'Edit Tag', 'auramaga' ),
+				'update_item'   => esc_html__( 'Update Tag', 'auramaga' ),
+				'add_new_item'  => esc_html__( 'Add New Tag', 'auramaga' ),
+				'new_item_name' => esc_html__( 'New Tag Name', 'auramaga' ),
+				'menu_name'     => esc_html__( 'Tags', 'auramaga' ),
+			),
+			'hierarchical'      => false,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'manga/tag',
+				'with_front' => false,
+			),
+		)
+	);
 
-	/* ─── Author (manga author) ─────────────────────── */
-	register_taxonomy( 'manga_author', $post_types, array(
-		'labels' => array(
-			'name'          => esc_html__( 'Manga Authors', 'manga-premium' ),
-			'singular_name' => esc_html__( 'Author', 'manga-premium' ),
-			'search_items'  => esc_html__( 'Search Authors', 'manga-premium' ),
-			'all_items'     => esc_html__( 'All Authors', 'manga-premium' ),
-			'add_new_item'  => esc_html__( 'Add New Author', 'manga-premium' ),
-			'menu_name'     => esc_html__( 'Authors', 'manga-premium' ),
-		),
-		'public'             => true,
-		'hierarchical'       => false,
-		'show_in_rest'       => true,
-		'rewrite'            => array( 'slug' => 'manga-author', 'with_front' => false ),
-		'show_admin_column'  => true,
-	) );
+	// Author - non-hierarchical.
+	register_taxonomy(
+		'manga_author',
+		$manga_post_type,
+		array(
+			'labels'            => array(
+				'name'          => esc_html_x( 'Authors', 'taxonomy general name', 'auramaga' ),
+				'singular_name' => esc_html_x( 'Author', 'taxonomy singular name', 'auramaga' ),
+				'search_items'  => esc_html__( 'Search Authors', 'auramaga' ),
+				'all_items'     => esc_html__( 'All Authors', 'auramaga' ),
+				'edit_item'     => esc_html__( 'Edit Author', 'auramaga' ),
+				'update_item'   => esc_html__( 'Update Author', 'auramaga' ),
+				'add_new_item'  => esc_html__( 'Add New Author', 'auramaga' ),
+				'new_item_name' => esc_html__( 'New Author Name', 'auramaga' ),
+				'menu_name'     => esc_html__( 'Authors', 'auramaga' ),
+			),
+			'hierarchical'      => false,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'manga/author',
+				'with_front' => false,
+			),
+		)
+	);
 
-	/* ─── Artist ────────────────────────────────────── */
-	register_taxonomy( 'manga_artist', $post_types, array(
-		'labels' => array(
-			'name'          => esc_html__( 'Artists', 'manga-premium' ),
-			'singular_name' => esc_html__( 'Artist', 'manga-premium' ),
-			'search_items'  => esc_html__( 'Search Artists', 'manga-premium' ),
-			'all_items'     => esc_html__( 'All Artists', 'manga-premium' ),
-			'add_new_item'  => esc_html__( 'Add New Artist', 'manga-premium' ),
-			'menu_name'     => esc_html__( 'Artists', 'manga-premium' ),
-		),
-		'public'             => true,
-		'hierarchical'       => false,
-		'show_in_rest'       => true,
-		'rewrite'            => array( 'slug' => 'manga-artist', 'with_front' => false ),
-		'show_admin_column'  => true,
-	) );
+	// Artist - non-hierarchical.
+	register_taxonomy(
+		'manga_artist',
+		$manga_post_type,
+		array(
+			'labels'            => array(
+				'name'          => esc_html_x( 'Artists', 'taxonomy general name', 'auramaga' ),
+				'singular_name' => esc_html_x( 'Artist', 'taxonomy singular name', 'auramaga' ),
+				'search_items'  => esc_html__( 'Search Artists', 'auramaga' ),
+				'all_items'     => esc_html__( 'All Artists', 'auramaga' ),
+				'edit_item'     => esc_html__( 'Edit Artist', 'auramaga' ),
+				'update_item'   => esc_html__( 'Update Artist', 'auramaga' ),
+				'add_new_item'  => esc_html__( 'Add New Artist', 'auramaga' ),
+				'new_item_name' => esc_html__( 'New Artist Name', 'auramaga' ),
+				'menu_name'     => esc_html__( 'Artists', 'auramaga' ),
+			),
+			'hierarchical'      => false,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'manga/artist',
+				'with_front' => false,
+			),
+		)
+	);
 
-	/* ─── Status ────────────────────────────────────── */
-	register_taxonomy( 'manga_status', $post_types, array(
-		'labels' => array(
-			'name'          => esc_html__( 'Status', 'manga-premium' ),
-			'singular_name' => esc_html__( 'Status', 'manga-premium' ),
-			'search_items'  => esc_html__( 'Search Statuses', 'manga-premium' ),
-			'all_items'     => esc_html__( 'All Statuses', 'manga-premium' ),
-			'add_new_item'  => esc_html__( 'Add New Status', 'manga-premium' ),
-			'menu_name'     => esc_html__( 'Status', 'manga-premium' ),
-		),
-		'public'             => true,
-		'hierarchical'       => true,
-		'show_in_rest'       => true,
-		'rewrite'            => array( 'slug' => 'manga-status', 'with_front' => false ),
-		'show_admin_column'  => true,
-	) );
+	// Status - hierarchical.
+	register_taxonomy(
+		'manga_status',
+		$manga_post_type,
+		array(
+			'labels'            => array(
+				'name'          => esc_html_x( 'Status', 'taxonomy general name', 'auramaga' ),
+				'singular_name' => esc_html_x( 'Status', 'taxonomy singular name', 'auramaga' ),
+				'search_items'  => esc_html__( 'Search Statuses', 'auramaga' ),
+				'all_items'     => esc_html__( 'All Statuses', 'auramaga' ),
+				'parent_item'   => esc_html__( 'Parent Status', 'auramaga' ),
+				'edit_item'     => esc_html__( 'Edit Status', 'auramaga' ),
+				'update_item'   => esc_html__( 'Update Status', 'auramaga' ),
+				'add_new_item'  => esc_html__( 'Add New Status', 'auramaga' ),
+				'new_item_name' => esc_html__( 'New Status Name', 'auramaga' ),
+				'menu_name'     => esc_html__( 'Status', 'auramaga' ),
+			),
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'manga/status',
+				'with_front' => false,
+			),
+		)
+	);
 
-	/* ─── Type ──────────────────────────────────────── */
-	register_taxonomy( 'manga_type', $post_types, array(
-		'labels' => array(
-			'name'          => esc_html__( 'Manga Types', 'manga-premium' ),
-			'singular_name' => esc_html__( 'Type', 'manga-premium' ),
-			'search_items'  => esc_html__( 'Search Types', 'manga-premium' ),
-			'all_items'     => esc_html__( 'All Types', 'manga-premium' ),
-			'add_new_item'  => esc_html__( 'Add New Type', 'manga-premium' ),
-			'menu_name'     => esc_html__( 'Types', 'manga-premium' ),
-		),
-		'public'             => true,
-		'hierarchical'       => true,
-		'show_in_rest'       => true,
-		'rewrite'            => array( 'slug' => 'manga-type', 'with_front' => false ),
-		'show_admin_column'  => true,
-	) );
+	// Type - hierarchical.
+	register_taxonomy(
+		'manga_type',
+		$manga_post_type,
+		array(
+			'labels'            => array(
+				'name'          => esc_html_x( 'Types', 'taxonomy general name', 'auramaga' ),
+				'singular_name' => esc_html_x( 'Type', 'taxonomy singular name', 'auramaga' ),
+				'search_items'  => esc_html__( 'Search Types', 'auramaga' ),
+				'all_items'     => esc_html__( 'All Types', 'auramaga' ),
+				'parent_item'   => esc_html__( 'Parent Type', 'auramaga' ),
+				'edit_item'     => esc_html__( 'Edit Type', 'auramaga' ),
+				'update_item'   => esc_html__( 'Update Type', 'auramaga' ),
+				'add_new_item'  => esc_html__( 'Add New Type', 'auramaga' ),
+				'new_item_name' => esc_html__( 'New Type Name', 'auramaga' ),
+				'menu_name'     => esc_html__( 'Types', 'auramaga' ),
+			),
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'manga/type',
+				'with_front' => false,
+			),
+		)
+	);
 
-	/* ─── Demographic ───────────────────────────────── */
-	register_taxonomy( 'manga_demographic', $post_types, array(
-		'labels' => array(
-			'name'          => esc_html__( 'Demographics', 'manga-premium' ),
-			'singular_name' => esc_html__( 'Demographic', 'manga-premium' ),
-			'search_items'  => esc_html__( 'Search Demographics', 'manga-premium' ),
-			'all_items'     => esc_html__( 'All Demographics', 'manga-premium' ),
-			'add_new_item'  => esc_html__( 'Add New Demographic', 'manga-premium' ),
-			'menu_name'     => esc_html__( 'Demographics', 'manga-premium' ),
-		),
-		'public'             => true,
-		'hierarchical'       => true,
-		'show_in_rest'       => true,
-		'rewrite'            => array( 'slug' => 'demographic', 'with_front' => false ),
-		'show_admin_column'  => true,
-	) );
+	// Demographic - hierarchical.
+	register_taxonomy(
+		'manga_demographic',
+		$manga_post_type,
+		array(
+			'labels'            => array(
+				'name'          => esc_html_x( 'Demographics', 'taxonomy general name', 'auramaga' ),
+				'singular_name' => esc_html_x( 'Demographic', 'taxonomy singular name', 'auramaga' ),
+				'search_items'  => esc_html__( 'Search Demographics', 'auramaga' ),
+				'all_items'     => esc_html__( 'All Demographics', 'auramaga' ),
+				'parent_item'   => esc_html__( 'Parent Demographic', 'auramaga' ),
+				'edit_item'     => esc_html__( 'Edit Demographic', 'auramaga' ),
+				'update_item'   => esc_html__( 'Update Demographic', 'auramaga' ),
+				'add_new_item'  => esc_html__( 'Add New Demographic', 'auramaga' ),
+				'new_item_name' => esc_html__( 'New Demographic Name', 'auramaga' ),
+				'menu_name'     => esc_html__( 'Demographics', 'auramaga' ),
+			),
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'manga/demographic',
+				'with_front' => false,
+			),
+		)
+	);
 
-	/* ─── Magazine ──────────────────────────────────── */
-	register_taxonomy( 'manga_magazine', $post_types, array(
-		'labels' => array(
-			'name'          => esc_html__( 'Magazines', 'manga-premium' ),
-			'singular_name' => esc_html__( 'Magazine', 'manga-premium' ),
-			'search_items'  => esc_html__( 'Search Magazines', 'manga-premium' ),
-			'all_items'     => esc_html__( 'All Magazines', 'manga-premium' ),
-			'add_new_item'  => esc_html__( 'Add New Magazine', 'manga-premium' ),
-			'menu_name'     => esc_html__( 'Magazines', 'manga-premium' ),
-		),
-		'public'             => true,
-		'hierarchical'       => false,
-		'show_in_rest'       => true,
-		'rewrite'            => array( 'slug' => 'magazine', 'with_front' => false ),
-		'show_admin_column'  => true,
-	) );
+	// Magazine - non-hierarchical.
+	register_taxonomy(
+		'manga_magazine',
+		$manga_post_type,
+		array(
+			'labels'            => array(
+				'name'          => esc_html_x( 'Magazines', 'taxonomy general name', 'auramaga' ),
+				'singular_name' => esc_html_x( 'Magazine', 'taxonomy singular name', 'auramaga' ),
+				'search_items'  => esc_html__( 'Search Magazines', 'auramaga' ),
+				'all_items'     => esc_html__( 'All Magazines', 'auramaga' ),
+				'edit_item'     => esc_html__( 'Edit Magazine', 'auramaga' ),
+				'update_item'   => esc_html__( 'Update Magazine', 'auramaga' ),
+				'add_new_item'  => esc_html__( 'Add New Magazine', 'auramaga' ),
+				'new_item_name' => esc_html__( 'New Magazine Name', 'auramaga' ),
+				'menu_name'     => esc_html__( 'Magazines', 'auramaga' ),
+			),
+			'hierarchical'      => false,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'manga/magazine',
+				'with_front' => false,
+			),
+		)
+	);
 }
-add_action( 'init', 'manga_premium_register_taxonomies' );
+add_action( 'init', 'auramaga_register_taxonomies', 11 );
