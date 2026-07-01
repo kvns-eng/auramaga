@@ -1,0 +1,16 @@
+/**
+ * Manga Premium – Reader Styles
+ *
+ * @package MangaPremium
+ */
+
+/* Reader is handled by main.css, this file adds chapter-specific overrides */
+
+body.reader-page .mp-header,
+body.single-chapter .mp-header { display: none; }
+body.reader-page .mp-footer,
+body.single-chapter .mp-footer { display: none; }
+body.reader-page .mp-main,
+body.single-chapter .mp-main { padding: 0; }
+body.reader-page,
+body.single-chapter { overflow-x: hidden; }
