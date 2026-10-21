@@ -1,3 +1,10 @@
 https://telegra.ph/Yaoi-Hentai-Manga-Desire-Drama-and-the-Stories-That-Keep-Readers-Coming-Back-10-18
 https://www.imagefap.com/blog.php?userid=3321874
 https://arca.live/b/sissy/186399790
+https://www.myvidster.com/profile/anymoviess2
+https://e621.net/users/2847298
+https://www.rule34.lol/profiles/kvns
+https://www.akiba-online.com/members/readerx.1379395/#about
+https://www.hentai-foundry.com/user/readerx/blogs/21883/Working-on-hentai-manga-reader
+https://www.xfree.com/kvn.joe
+https://www.hkgay.net/showthread.php?tid=123888
